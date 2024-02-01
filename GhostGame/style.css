@@ -1,0 +1,33 @@
+body{
+background-color: #160C08;
+display: flex;
+align-items: flex-start;
+justify-content: center;
+}
+.bkg{
+    width: 400px;
+    height: 600px;
+    background-image: url(/img/GhostBackground.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    font-size: 100px;
+    text-align: center;
+}
+
+.ghost{ 
+    width: 10rem;
+    height: 8rem;
+    background-image: url(/img/Ghost.PNG);
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.leaf{
+    width: 85px;
+    height: 152px;
+    background-image: url('/img/leaf.png');
+    background-size: cover;
+    position: absolute;
+}
