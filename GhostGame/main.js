@@ -1,62 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const bkg = document.querySelector('.bkg')
-    const ghost = document.createElement('div')
-    let isGameOver = false
-    let leafCount = 5
-    let leaves = []
-    let ghostLeftSpace = 50
-    let ghostBottomSpace = 150 //starting point
+//bkg
+let bkg;
+let bkgWidth = 360;
+let bkgHeight = 576;
+let context; //used to add stuff on canvas
 
-    class Leaf {
-        constructor(newLeafBottom){
-            this.left = Math.random() *  315 
-            // 315 = 400px bkg - 85px leaf to make sure the leaf doesn't move out of the background. 
-            this.bottom = newLeafBottom
-            this.visual = document.createElement('div')
+//ghostie
+let ghostWidth = 46;
+let ghostHeight = 56;
+let ghostX = bkgWidth/2 - ghostWidth/2;
+let ghostY = bkgHeight*7/8 - ghostHeight;
+let ghostImg;
 
-            const visual = this.visual
-            visual.classList.add('leaf')
-            visual.style.left = this.left + 'px'
-            visual.style.bottom = this.bottom + 'px'
-            bkg.appendChild(visual)
-        }
+let ghost = {
+    img : null,
+    x : ghostX,
+    y : ghostY,
+    width : ghostWidth,
+    height : ghostHeight
+}
+
+window.onload = function(){
+    bkg = document.getElementById("bkg");
+    bkg.height = bkgHeight;
+    bkg.width = bkgWidth;
+    context = bkg.getContext("2d"); //used for drawing on the board
+
+    //add ghost
+    ghostImg = new Image();
+    ghostImg.src = "/GhostGame/img/Ghost.PNG";
+    ghost.img = ghostImg;
+    ghostImg.onload = function(){
+        context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
     }
-
-    function createLeaves(){
-        for (let i = 0; i < leafCount; i ++){
-            let leafGap = 600 / leafCount
-            let newLeafBottom = 100 + i * leafGap
-            let newLeaf = new Leaf(newLeafBottom)
-            leaves.push(newLeaf)
-            console.log(leaves)
-        }
-    }
-    function moveLeaves(){
-        if (ghostBottomSpace > 100) {
-            leaves.forEach(leaf => {
-                leaf.bottom -= 4
-                let visual = leaf.visual
-                visual.style.bottom = leaf.bottom + 'px'
-            })
-        }
-    }
-
-
-    function createGhost(){
-        bkg.appendChild(ghost)
-        ghost.classList.add('ghost')
-        ghostLeftSpace = leaves[0].left
-        ghost.style.left = ghostLeftSpace + 'px'
-        ghost.style.bottom = ghostBottomSpace + 'px'
-    }
-    
-
-    function start(){
-        if(!isGameOver) {
-            createLeaves()
-            createGhost()
-            setInterval(moveLeaves, 30)
-        }
-    }
-    start()
-})
+}
