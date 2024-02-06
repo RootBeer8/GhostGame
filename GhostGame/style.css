@@ -22,18 +22,18 @@ justify-content: center;
     text-align: center;
 }
 */
-.ghost{ 
+/* .ghost{ 
     /* width: 10rem;
     height: 8rem; */
-    background-image: url(/GhostGame/img/Ghost.PNG);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
+    /* background-image: url(/GhostGame/img/Ghost.PNG); */
+    /* background-size: contain;
+    background-repeat: no-repeat; 
+} */
 
-/* .leaf{
+.leaf{
     width: 85px;
     height: 152px;
-    background-image: url('/img/leaf.png');
+    background-image: url(/);
     background-size: cover;
     position: absolute;
-} */
+}
