@@ -13,6 +13,16 @@ let ghostImg;
 
 //movements
 let velocityX = 0;
+let velocityY = 0; 
+let initialVelocityY = -8; //start jump distance
+let gravity = 0.4;
+
+
+//leaves
+let leafArray = [];
+let leafWidth = 60;
+let leafHeight = 18;
+let leafImg;
 
 let ghost = {
     img : null,
@@ -36,6 +46,11 @@ window.onload = function(){
         context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
     }
 
+    leafImg = new Image();
+    leafImg.src = "/GhostGame/img/leaf.png";
+
+    placeLeaves();
+
     requestAnimationFrame(update);
     document.addEventListener("keydown", moveGhost);
 }
@@ -53,6 +68,12 @@ function update() {
     }
     context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
 
+    //leaves
+    for (let i = 0; i < leafArray.length; i++){
+        let leaf = leafArray[i];
+        context.drawImage(leaf.img, leaf.x, leaf.y, leaf.width, leaf.height);
+    }
+
 }
 
 function moveGhost(e) {
@@ -62,4 +83,30 @@ function moveGhost(e) {
     else if (e.code == "ArrowLeft") { //move left
         velocityX = -4;
     }
+}
+
+function placeLeaves() {
+    leafArray = [];
+
+    //first leaf
+    let leaf = {
+        img : leafImg,
+        x : bkgWidth/2,
+        y : bkgHeight - 50,
+        width : leafWidth,
+        height : leafHeight
+    }
+
+    leafArray.push(leaf);
+
+    leaf = {
+        img : leafImg,
+        x : bkgWidth/2,
+        y : bkgHeight - 150,
+        width : leafWidth,
+        height : leafHeight
+    }
+
+    leafArray.push(leaf);
+
 }
