@@ -87,7 +87,7 @@ function update() {
     for (let i = 0; i < leafArray.length; i++){
         let leaf = leafArray[i];
         if (velocityY < 0 && ghost.y < bkgHeight * 3/4) //checking to make sure ghost is falling and is 3/4 above bottom
-            leaf.y -= initialVelocityY; //slides platform down as ghost falls
+            leaf.y -= initialVelocityY; //slides leaves down as ghost falls
         if (detectCollision(ghost, leaf) && velocityY >= 0) {
             velocityY = initialVelocityY; // jump off leaf
         }
@@ -120,6 +120,25 @@ function moveGhost(e) {
     else if (e.code == "ArrowLeft") { //move left
         velocityX = -4;
     }
+    else if (e.code == "Space" && gameOver) {
+        //restart game
+        ghost = {
+            img : ghostImg,
+            x : ghostX,
+            y : ghostY,
+            width : ghostWidth,
+            height : ghostHeight
+        }
+
+        velocityX = 0;
+        velocityY = initialVelocityY;
+        score = 0;
+        maxScore = 0;
+        gameOver = false
+        placeLeaves(); //clearing all platforms from previous game
+    }
+
+    leafArray.push(leaf); // place new leaves for new game
 }
 
 function placeLeaves() {
