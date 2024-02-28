@@ -11,24 +11,6 @@ justify-content: center;
     background-repeat: no-repeat;
     background-size: contain;
 }
-/* .bkg{
-    width: 400px;
-    height: 600px;
-    background-image: url(/img/GhostBackground.jpg);
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: relative;
-    font-size: 100px;
-    text-align: center;
-}
-*/
-/* .ghost{ 
-    /* width: 10rem;
-    height: 8rem; */
-    /* background-image: url(/GhostGame/img/Ghost.PNG); */
-    /* background-size: contain;
-    background-repeat: no-repeat; 
-} */
 
 .leaf{
     width: 85px;
@@ -36,4 +18,8 @@ justify-content: center;
     background-image: url(/GhostGame/img/leaf.png);
     background-size: cover;
     position: absolute;
+}
+
+#startBtn{
+    color: green;
 }

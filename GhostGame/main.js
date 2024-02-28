@@ -100,6 +100,21 @@ function update() {
         newLeaf();
     }
 
+//     //score
+//     updateScore();
+//     context.fillStyle = "white";
+//     context.font = " 30px 'Cute Font', sans-serif";
+//     context.fillText(score, 5, 20);
+
+//     if (gameOver) {
+//         context.fillText("Game Over: Press Start to Play", bkgWidth/7, bkgHeight*7/8);
+
+
+//     }
+
+// }
+//---------------------------------------------------------
+
     //score
     updateScore();
     context.fillStyle = "white";
@@ -108,19 +123,17 @@ function update() {
 
     if (gameOver) {
         context.fillText("Game Over: Press Start to Play", bkgWidth/7, bkgHeight*7/8);
+        const startBtn = document.getElementById("startBtn");
+        return startBtn;
 
     }
 
 }
 
-function moveGhost(e) {
-    if (e.code == "ArrowRight") { //move right
-        velocityX = 4;
-    }
-    else if (e.code == "ArrowLeft") { //move left
-        velocityX = -4;
-    }
-    else if (e.code == "Space" && gameOver) {
+
+
+startBtn.addEventListener("click", function () {
+    if (gameOver) {
         //restart game
         ghost = {
             img : ghostImg,
@@ -136,10 +149,58 @@ function moveGhost(e) {
         maxScore = 0;
         gameOver = false
         placeLeaves(); //clearing all platforms from previous game
+        startBtn.remove();
     }
 
+
     leafArray.push(leaf); // place new leaves for new game
+    
+})
+
+
+
+function moveGhost(e) {
+    if (e.code == "ArrowRight") { //move right
+        velocityX = 4;
+    }
+    else if (e.code == "ArrowLeft") { //move left
+        velocityX = -4;
+    }
+
 }
+
+
+
+
+//---------------------------------------------------------
+
+// function moveGhost(e) {
+//     if (e.code == "ArrowRight") { //move right
+//         velocityX = 4;
+//     }
+//     else if (e.code == "ArrowLeft") { //move left
+//         velocityX = -4;
+//     }
+//     else if (e.code == "Space" && gameOver) {
+//         //restart game
+//         ghost = {
+//             img : ghostImg,
+//             x : ghostX,
+//             y : ghostY,
+//             width : ghostWidth,
+//             height : ghostHeight
+//         }
+
+//         velocityX = 0;
+//         velocityY = initialVelocityY;
+//         score = 0;
+//         maxScore = 0;
+//         gameOver = false
+//         placeLeaves(); //clearing all platforms from previous game
+//     }
+
+//     leafArray.push(leaf); // place new leaves for new game
+// }
 
 function placeLeaves() {
     leafArray = [];
