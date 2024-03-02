@@ -26,6 +26,7 @@ let initialVelocityY = -8; //start jump distance
 let gravity = 0.4;
 
 
+
 //leaves
 let leafArray = [];
 let leafWidth = 60;
@@ -118,22 +119,21 @@ function update() {
     //score
     updateScore();
     context.fillStyle = "white";
-    context.font = " 30px 'Cute Font', sans-serif";
+    context.font = " 25px 'Cute Font', sans-serif";
     context.fillText(score, 5, 20);
 
     if (gameOver) {
-        context.fillText("Game Over: Press Start to Play", bkgWidth/7, bkgHeight*7/8);
-        const startBtn = document.getElementById("startBtn");
-        return startBtn;
+        context.fillText("Game Over: Press Restart to Play Again", bkgWidth/12, bkgHeight*7/8);
+        
 
     }
 
 }
 
 
-
+const startBtn = document.getElementById("startBtn");
 startBtn.addEventListener("click", function () {
-    if (gameOver) {
+    // if (gameOver) {
         //restart game
         ghost = {
             img : ghostImg,
@@ -149,12 +149,22 @@ startBtn.addEventListener("click", function () {
         maxScore = 0;
         gameOver = false
         placeLeaves(); //clearing all platforms from previous game
-        startBtn.remove();
-    }
+
+    
 
 
     leafArray.push(leaf); // place new leaves for new game
     
+})
+
+const rightBtn = document.getElementById("rightBtn");
+rightBtn.addEventListener("click", function () {
+    velocityX = 4;
+})
+
+const leftBtn = document.getElementById("leftBtn");
+leftBtn.addEventListener("click", function () {
+    velocityX = -4;
 })
 
 

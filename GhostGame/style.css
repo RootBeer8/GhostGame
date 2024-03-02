@@ -1,6 +1,6 @@
 body{
 background-color: #160C08;
-display: flex;
+display: grid;
 text-align: center;
 align-items: flex-start;
 justify-content: center;
@@ -20,6 +20,29 @@ justify-content: center;
     position: absolute;
 }
 
+div{
+    display: grid;
+    align-items: center;
+    
+}
+
 #startBtn{
-    color: green;
+    color: white;
+    font-size: 16px;
+    background-color: 160c08;
+    border: 2px solid #ECD4A5;
+    font-family: 'Courier New', Courier, monospace;
+    width: 112px;
+    height: 83%;
+    margin: 0 35% 8%;
+}
+
+.btn{
+    color: rgb(175, 91, 0);
+    font-size: 48px;
+    grid-row: 2;
+    background-color: 160c08;
+    border: 2px solid #ECD4A5;
+    width: 55px;
+    margin: 0 35%;
 }
