@@ -4,6 +4,7 @@
 
 Play as a little ghost and earn points by jumping on falling leaves! <br> 
 This game can be played by the arrows on your keyboard or with the arrows on screen. <br>
+The game will add points as the ghost jumps up on leaves and deduct points when it falls. <br>
 Everything was created with HTML, CSS, and JavaScript. <br>
 Images were designed and created by my sister and I. <br>
 
