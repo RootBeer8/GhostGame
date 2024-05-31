@@ -47,14 +47,14 @@ window.onload = function(){
 
     //add ghost
     ghostImg = new Image();
-    ghostImg.src = "/GhostGame/img/Ghost.PNG";
+    ghostImg.src = "/img/Ghost.PNG";
     ghost.img = ghostImg;
     ghostImg.onload = function(){
         context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
     }
 
     leafImg = new Image();
-    leafImg.src = "/GhostGame/img/leaf.PNG";
+    leafImg.src = "/img/leaf.PNG";
 
     velocityY = initialVelocityY;
     placeLeaves();
