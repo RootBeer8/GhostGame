@@ -83,24 +83,30 @@ function update() {
         gameOver = true;
     }
 
-    context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
+    
+        context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height)
+
 
     //leaves
     for (let i = 0; i < leafArray.length; i++){
         let leaf = leafArray[i];
         if (velocityY < 0 && ghost.y < bkgHeight * 3/4) //checking to make sure ghost is falling and is 3/4 above bottom
             leaf.y -= initialVelocityY; //slides leaves down as ghost falls
+            
         if (detectCollision(ghost, leaf) && velocityY >= 0) {
             velocityY = initialVelocityY; // jump off leaf
         }
+
+    
         context.drawImage(leaf.img, leaf.x, leaf.y, leaf.width, leaf.height);
-    }
+    
 
     //clear leaves and add new leaves
     while (leafArray.length > 0 && leafArray[0].y >= bkgHeight){
         leafArray.shift(); //removes first element in array
         newLeaf();
     }
+}
 
 //     //score
 //     updateScore();
