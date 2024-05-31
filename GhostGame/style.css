@@ -7,7 +7,7 @@ justify-content: center;
 }
 
 #bkg{
-    background-image: url(/GhostGame/img/GhostBackground.jpg);
+    background-image: url(/GhostGame/img/GhostBackground.JPG);
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -15,7 +15,7 @@ justify-content: center;
 .leaf{
     width: 85px;
     height: 152px;
-    background-image: url(/GhostGame/img/leaf.png);
+    background-image: url(/GhostGame/img/leaf.PNG);
     background-size: cover;
     position: absolute;
 }
