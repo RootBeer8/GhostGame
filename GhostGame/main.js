@@ -19,6 +19,7 @@ let ghost = {
     height : ghostHeight
 }
 
+
 //movements
 let velocityX = 0;
 let velocityY = 0; 
