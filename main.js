@@ -12,7 +12,7 @@ let ghostY = bkgHeight*7/8 - ghostHeight;
 let ghostImg;
 
 let ghost = {
-    img : null,
+    img : new Image(),
     x : ghostX,
     y : ghostY,
     width : ghostWidth,
