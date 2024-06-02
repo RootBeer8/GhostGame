@@ -43,11 +43,11 @@ window.onload = function () {
 
     // Load images
     ghostImg = new Image();
-    ghostImg.src = "/img/Ghost.PNG";
+    ghostImg.src = "GhostGame/img/Ghost.PNG";
     ghost.img = ghostImg;
 
     leafImg = new Image();
-    leafImg.src = "/img/leaf.PNG";
+    leafImg.src = "GhostGame/img/leaf.PNG";
 
     // Keep track of loaded images
     let imagesLoaded = 0;

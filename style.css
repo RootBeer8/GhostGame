@@ -15,7 +15,7 @@ justify-content: center;
 .leaf{
     width: 85px;
     height: 152px;
-    background-image: url(GhostGame/img/leaf.PNG);
+    background-image: url(/GhostGame/img/leaf.PNG);
     background-size: cover;
     position: absolute;
 }
