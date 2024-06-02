@@ -6,6 +6,7 @@ align-items: flex-start;
 justify-content: center;
 }
 
+
 #bkg{
     background-image: url(/GhostGame/img/GhostBackground.jpg);
     background-repeat: no-repeat;
