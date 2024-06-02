@@ -41,7 +41,7 @@ window.onload = function () {
     bkg.width = bkgWidth;
     context = bkg.getContext("2d"); // used for drawing on background
 
-    // add ghost
+    // Load images
     ghostImg = new Image();
     ghostImg.src = "/img/Ghost.PNG";
     ghost.img = ghostImg;
@@ -49,6 +49,7 @@ window.onload = function () {
     leafImg = new Image();
     leafImg.src = "/img/leaf.PNG";
 
+    // Keep track of loaded images
     let imagesLoaded = 0;
     const totalImages = 2;
 
@@ -103,8 +104,9 @@ function update() {
     // leaves
     for (let i = 0; i < leafArray.length; i++) {
         let leaf = leafArray[i];
-        if (velocityY < 0 && ghost.y < bkgHeight * 3 / 4) // checking to make sure ghost is falling and is 3/4 above bottom
+        if (velocityY < 0 && ghost.y < bkgHeight * 3 / 4) { // checking to make sure ghost is falling and is 3/4 above bottom
             leaf.y -= initialVelocityY; // slides leaves down as ghost falls
+        }
 
         if (detectCollision(ghost, leaf) && velocityY >= 0) {
             velocityY = initialVelocityY; // jump off leaf
@@ -118,8 +120,6 @@ function update() {
         leafArray.shift(); // removes first element in array
         newLeaf();
     }
-
-//---------------------------------------------------------
 
     // score
     updateScore();
