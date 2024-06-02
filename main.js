@@ -2,33 +2,30 @@
 let bkg;
 let bkgWidth = 360;
 let bkgHeight = 576;
-let context; //used to add stuff on canvas
+let context; // used to add stuff on canvas
 
-//ghostie
+// ghostie
 let ghostWidth = 46;
 let ghostHeight = 56;
-let ghostX = bkgWidth/2 - ghostWidth/2;
-let ghostY = bkgHeight*7/8 - ghostHeight;
+let ghostX = bkgWidth / 2 - ghostWidth / 2;
+let ghostY = bkgHeight * 7 / 8 - ghostHeight;
 let ghostImg;
 
 let ghost = {
-    img : new Image(),
-    x : ghostX,
-    y : ghostY,
-    width : ghostWidth,
-    height : ghostHeight
-}
+    img: null,
+    x: ghostX,
+    y: ghostY,
+    width: ghostWidth,
+    height: ghostHeight
+};
 
-
-//movements
+// movements
 let velocityX = 0;
-let velocityY = 0; 
-let initialVelocityY = -8; //start jump distance
+let velocityY = 0;
+let initialVelocityY = -8; // start jump distance
 let gravity = 0.4;
 
-
-
-//leaves
+// leaves
 let leafArray = [];
 let leafWidth = 60;
 let leafHeight = 18;
@@ -38,24 +35,42 @@ let score = 0;
 let maxScore = 0;
 let gameOver = false;
 
-
-window.onload = function(){
+window.onload = function () {
     bkg = document.getElementById("bkg");
     bkg.height = bkgHeight;
     bkg.width = bkgWidth;
-    context = bkg.getContext("2d"); //used for drawing on background
+    context = bkg.getContext("2d"); // used for drawing on background
 
-    //add ghost
+    // add ghost
     ghostImg = new Image();
     ghostImg.src = "/img/Ghost.PNG";
     ghost.img = ghostImg;
-    ghostImg.onload = function(){
-        context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
-    }
 
     leafImg = new Image();
     leafImg.src = "/img/leaf.PNG";
 
+    let imagesLoaded = 0;
+    const totalImages = 2;
+
+    function checkAllImagesLoaded() {
+        imagesLoaded++;
+        if (imagesLoaded === totalImages) {
+            startGame();
+        }
+    }
+
+    ghostImg.onload = checkAllImagesLoaded;
+    ghostImg.onerror = function () {
+        console.error('Failed to load ghost image.');
+    };
+
+    leafImg.onload = checkAllImagesLoaded;
+    leafImg.onerror = function () {
+        console.error('Failed to load leaf image.');
+    };
+};
+
+function startGame() {
     velocityY = initialVelocityY;
     placeLeaves();
     requestAnimationFrame(update);
@@ -64,158 +79,98 @@ window.onload = function(){
 
 function update() {
     requestAnimationFrame(update);
-    if (gameOver){
+    if (gameOver) {
         return;
     }
     context.clearRect(0, 0, bkg.width, bkg.height);
 
-    //ghost
+    // ghost
     ghost.x += velocityX;
     if (ghost.x > bkgWidth) {
-        ghost.x = 0; 
-    }else if (ghost.x + ghost.width < 0) {
+        ghost.x = 0;
+    } else if (ghost.x + ghost.width < 0) {
         ghost.x = bkgWidth;
     }
 
     velocityY += gravity;
     ghost.y += velocityY;
-    if (ghost.y > bkg.height){
+    if (ghost.y > bkg.height) {
         gameOver = true;
     }
 
-    
-        context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height)
+    context.drawImage(ghost.img, ghost.x, ghost.y, ghost.width, ghost.height);
 
-
-    //leaves
-    for (let i = 0; i < leafArray.length; i++){
+    // leaves
+    for (let i = 0; i < leafArray.length; i++) {
         let leaf = leafArray[i];
-        if (velocityY < 0 && ghost.y < bkgHeight * 3/4) //checking to make sure ghost is falling and is 3/4 above bottom
-            leaf.y -= initialVelocityY; //slides leaves down as ghost falls
-            
+        if (velocityY < 0 && ghost.y < bkgHeight * 3 / 4) // checking to make sure ghost is falling and is 3/4 above bottom
+            leaf.y -= initialVelocityY; // slides leaves down as ghost falls
+
         if (detectCollision(ghost, leaf) && velocityY >= 0) {
             velocityY = initialVelocityY; // jump off leaf
         }
 
-    
         context.drawImage(leaf.img, leaf.x, leaf.y, leaf.width, leaf.height);
-    
+    }
 
-    //clear leaves and add new leaves
-    while (leafArray.length > 0 && leafArray[0].y >= bkgHeight){
-        leafArray.shift(); //removes first element in array
+    // clear leaves and add new leaves
+    while (leafArray.length > 0 && leafArray[0].y >= bkgHeight) {
+        leafArray.shift(); // removes first element in array
         newLeaf();
     }
-}
 
-//     //score
-//     updateScore();
-//     context.fillStyle = "white";
-//     context.font = " 30px 'Cute Font', sans-serif";
-//     context.fillText(score, 5, 20);
-
-//     if (gameOver) {
-//         context.fillText("Game Over: Press Start to Play", bkgWidth/7, bkgHeight*7/8);
-
-
-//     }
-
-// }
 //---------------------------------------------------------
 
-    //score
+    // score
     updateScore();
     context.fillStyle = "white";
-    context.font = " 25px 'Cute Font', sans-serif";
+    context.font = "25px 'Cute Font', sans-serif";
     context.fillText(score, 5, 20);
 
     if (gameOver) {
-        context.fillText("Game Over: Press Restart to Play Again", bkgWidth/12, bkgHeight*7/8);
-        
-
+        context.fillText("Game Over: Press Restart to Play Again", bkgWidth / 12, bkgHeight * 7 / 8);
     }
-
 }
-
 
 const startBtn = document.getElementById("startBtn");
 startBtn.addEventListener("click", function () {
-    // if (gameOver) {
-        //restart game
-        ghost = {
-            img : ghostImg,
-            x : ghostX,
-            y : ghostY,
-            width : ghostWidth,
-            height : ghostHeight
-        }
+    ghost = {
+        img: ghostImg,
+        x: ghostX,
+        y: ghostY,
+        width: ghostWidth,
+        height: ghostHeight
+    };
 
-        velocityX = 0;
-        velocityY = initialVelocityY;
-        score = 0;
-        maxScore = 0;
-        gameOver = false
-        placeLeaves(); //clearing all platforms from previous game
-
-    
-
-
-    leafArray.push(leaf); // place new leaves for new game
-    
-})
+    velocityX = 0;
+    velocityY = initialVelocityY;
+    score = 0;
+    maxScore = 0;
+    gameOver = false;
+    leafArray = []; // clear all previous leaves
+    placeLeaves(); // place new leaves for new game
+});
 
 const rightBtn = document.getElementById("rightBtn");
 rightBtn.addEventListener("click", function () {
     velocityX = 4;
-})
+});
 
 const leftBtn = document.getElementById("leftBtn");
 leftBtn.addEventListener("click", function () {
     velocityX = -4;
-})
-
-
+});
 
 function moveGhost(e) {
-    if (e.code == "ArrowRight") { //move right
+    if (e.code === "ArrowRight") { // move right
         velocityX = 4;
-    }
-    else if (e.code == "ArrowLeft") { //move left
+    } else if (e.code === "ArrowLeft") { // move left
         velocityX = -4;
     }
-
 }
 
 
 //---------------------------------------------------------
-
-// function moveGhost(e) {
-//     if (e.code == "ArrowRight") { //move right
-//         velocityX = 4;
-//     }
-//     else if (e.code == "ArrowLeft") { //move left
-//         velocityX = -4;
-//     }
-//     else if (e.code == "Space" && gameOver) {
-//         //restart game
-//         ghost = {
-//             img : ghostImg,
-//             x : ghostX,
-//             y : ghostY,
-//             width : ghostWidth,
-//             height : ghostHeight
-//         }
-
-//         velocityX = 0;
-//         velocityY = initialVelocityY;
-//         score = 0;
-//         maxScore = 0;
-//         gameOver = false
-//         placeLeaves(); //clearing all platforms from previous game
-//     }
-
-//     leafArray.push(leaf); // place new leaves for new game
-// }
 
 function placeLeaves() {
     leafArray = [];
