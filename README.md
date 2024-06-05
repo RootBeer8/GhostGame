@@ -1,6 +1,6 @@
 # Ghost Game 👻🍂
 
-### Click here to play!
+### Click [here](https://jojotru.github.io/GhostGame/) to play!
 
 Play as a little ghost and earn points by jumping on falling leaves! <br> 
 This game can be played by the arrows on your keyboard or with the arrows on screen. <br>
